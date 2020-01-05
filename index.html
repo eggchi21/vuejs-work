@@ -30,7 +30,17 @@
       <p>X:{{ x }} , Y:{{ y }}</p>
       <a v-on:click="preventEvent":href="url">Google</a>
       <a v-on:click.prevent :href="url">Google</a>
-
+      <input type="text" v-on:keyup.enter="myAlert">
+      <button v-on:[event]='countUP()'>カウントアップ引数[]</button>
+      <button @[event]='countUP()'>カウントアップ省略記法</button>
+      <input type="text" v-model="message2">
+      <h1>{{ message2}}</h1>
+      <p>{{ counter　}}</p>
+      <button @click="counter +=1">+1</button>
+      <p>{{ otherCounter　}}</p>
+      <button @click="otherCounter +=1">別の+1</button>
+      <p>{{ lessThanTreeComputed }}</p>
+      <p>{{ lessThanTreeMethod()}}</p>
 
     </div>
     <script>
@@ -38,6 +48,7 @@
         el: '#app',
         data: {
           message: 'HelloWorld!',
+          message2: 'AAA',
           number: 0,
           x:0,
           y:0,
@@ -48,9 +59,30 @@
           twitterObject: {
             href: 'https://twitter.com',
             id: 31
+          },
+          event: 'click',
+          counter: 0,
+          otherCounter: 0
+        },
+        watch: {
+          counter: function(){
+            var vm = this;
+            setTimeout(function(){
+              vm.counter = 0
+            },3000)
+          }
+        },
+        computed: {
+          lessThanTreeComputed: function(){
+            console.log('Computed')
+            return this.counter>3 ? '3より上' : '3以下'
           }
         },
         methods: {
+          lessThanTreeMethod: function(){
+            console.log('Method')
+            return this.counter>3 ? '3より上' : '3以下'
+          },
           reverseMessage: function(){
             this.message = this.message.split('').reverse().join('');
           },
@@ -77,6 +109,9 @@
           },
           preventEvent: function(event){
             event.preventDefault()
+          },
+          myAlert(){
+            alert('enter')
           }
 
         }
