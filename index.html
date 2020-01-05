@@ -41,6 +41,18 @@
       <button @click="otherCounter +=1">別の+1</button>
       <p>{{ lessThanTreeComputed }}</p>
       <p>{{ lessThanTreeMethod()}}</p>
+      <h1 :class="{red: isActive , 'bg-blue': !isActive}">Hello</h1>
+      <h1 :class="classObject">Hello</h1>
+      <h1 :class="[color, bg]">Hello</h1>
+      <h1 :class="[{red: isActive}, bg]">Hello</h1>
+      <button @click="isActive = !isActive">切り替え</button>
+      <h1 :style="{color: textColor, 'background-color': bgColor}">Hello</h1>
+      <h1 :style="styleObject">Hello</h1>
+      <h1 :style="[styleObject, baseStyles]">Hello</h1>
+
+
+
+
 
     </div>
     <script>
@@ -62,7 +74,19 @@
           },
           event: 'click',
           counter: 0,
-          otherCounter: 0
+          otherCounter: 0,
+          isActive: true,
+          color: 'red',
+          bg: 'bg-blue',
+          textColor: 'red',
+          bgColor: 'blue',
+          styleObject: {
+            color: 'red',
+            'background-color': 'blue'
+          },
+          baseStyles: {
+            fontSize:'60px'
+          }
         },
         watch: {
           counter: function(){
@@ -76,6 +100,9 @@
           lessThanTreeComputed: function(){
             console.log('Computed')
             return this.counter>3 ? '3より上' : '3以下'
+          },
+          classObject: function(){
+            return {red: this.isActive , 'bg-blue': !this.isActive}
           }
         },
         methods: {
@@ -119,3 +146,13 @@
     </script>
   </body>
 </html>
+
+<style>
+.red{
+  color: red;
+}
+
+.bg-blue{
+  background-color: blue;
+}
+</style>
