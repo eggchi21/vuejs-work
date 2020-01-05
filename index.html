@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+  <body>
+    <script src="vue.js"></script>
+
+    <div id="app">
+      <p>{{ message }}</p>
+      <p>{{ number + 5 }}</p>
+      <p>{{ ok ? 'Yes' : 'No' }}</p>
+      <p>{{ sayHi() }}</p>
+      <div v-html="html"></div>
+      <a v-bind:href="url">Google</a>
+      <a :href="url">Google</a>
+      <a :[attribute]="url">Google</a>
+      <a v-bind="twitterObject">Twitter</a>
+      <p>現在{{ number }}回クリックされています</p>
+      <button v-on:click='countUP()'>カウントアップ</button>
+
+      <button v-on:click="reverseMessage">メッセージ反転</button v-on:click="reverseMessage">
+    </div>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          message: 'HelloWorld!',
+          number: 0,
+          ok: true,
+          html: '<h1>h1です</h1>',
+          url: 'https://google.com',
+          attribute:'href',
+          twitterObject: {
+            href: 'https://twitter.com',
+            id: 31
+          }
+        },
+        methods: {
+          reverseMessage: function(){
+            this.message = this.message.split('').reverse().join('');
+          },
+          sayHi: function(){
+            return this.message;
+          },
+          countUP: function(){
+            this.number += 1
+          }
+
+        }
+      });
+    </script>
+  </body>
+</html>
