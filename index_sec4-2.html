@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+  <body>
+    <script src="vue.js"></script>
+
+    <div id="app">
+      <p>{{message}}</p>
+      <p>{{name}}</p>
+      <button @click="name= 'ボタンから変更'">変更</button>
+      <button @click="message= 'ボタンから変更'">変更</button>
+
+    </div>
+
+    <script>
+      var data = {
+        message:'こんにちは',
+        name: 'サンプル'
+      }
+      var vm = new Vue({
+        el: '#app',
+        data: data
+        })
+        // 後付はreactiveにならない
+        vm.name = 'サンプル2'
+
+        console.log(vm)
+        console.log(vm.$data)
+
+
+    </script>
+  </body>
+</html>
+
+<style>
+
+</style>
