@@ -12,10 +12,14 @@
     <div id="app">
       <p>{{message}}</p>
       <p>{{name}}</p>
+      <p>{{myData}}</p>
       <button @click="name= 'ボタンから変更'">変更</button>
       <button @click="message= 'ボタンから変更'">変更</button>
-
     </div>
+
+    <div id= "app2"></div>
+    <div id= "app3"></div>
+
 
     <script>
       var data = {
@@ -23,14 +27,44 @@
         name: 'サンプル'
       }
       var vm = new Vue({
-        el: '#app',
-        data: data
+        // el: '#app',
+        data: data,
+        computed: {
+          myData: function(){
+            return this.$data
+            }
+          },
         })
         // 後付はreactiveにならない
         vm.name = 'サンプル2'
 
         console.log(vm)
         console.log(vm.$data)
+        // 後付で
+        vm.$mount('#app')
+
+        new Vue({
+          el: '#app2',
+          data: {
+            name: 'サンプル'
+          },
+          template: '<h1>こんにちは、{{name}}</h1>'
+        })
+
+        new Vue({
+          data: {
+            name: 'サンプル'
+          },
+          render: function(createElement){
+            return createElement('h1','こんにちは、'+this.name);
+          }
+        }).$mount('#app3')
+
+        var dir = document.captureEvent('div');
+        console.log(dir)
+        console.log(document)
+        console.dir(document)
+
 
 
     </script>
