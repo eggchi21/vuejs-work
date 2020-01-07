@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+  <body>
+    <script src="vue.js"></script>
+
+
+    <div id = "app4">
+      <h1>こんにちは,{{ name }} </h1>
+      <button @click="name='太郎'">名前を変更</button>
+      <button @click="destroy">インスタンスを破壊</button>
+
+    </div>
+    <div class='hello'>
+
+    </div>
+    <hello></hello>
+    <hello></hello>
+
+
+    <script>
+      Vue.component('hello',{
+        template:'<p>こんにちは</p>'
+      });
+
+        new Vue({
+          el: '#app4',
+          data: {
+            name:'サンプル'
+          },
+          beforeCreate: function() {
+            console.log('beforCreate')
+          },
+          created: function() {
+            console.log('created')
+          },
+          beforeMount: function() {
+            console.log('beforMount')
+          },
+          mounted: function() {
+            console.log('mounted')
+          },
+          beforeUpdated: function() {
+            console.log('beforeUpdated')
+          },
+          updated: function() {
+            console.log('updated')
+          },
+          beforeDestroy: function() {
+            console.log('beforDestroy')
+          },
+          destroyed: function() {
+            console.log('destroyed')
+          },
+          methods: {
+            destroy: function(){
+              this.$destroy()
+            }
+          }
+        })
+        new Vue({
+          el:'.hello',
+          template:'<p>こんにちは</p>'
+        })
+
+
+    </script>
+  </body>
+</html>
+
+<style>
+
+</style>
